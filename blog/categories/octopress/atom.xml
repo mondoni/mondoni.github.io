@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | The Endless Search for Knowledge]]></title>
+  <link href="http://mondoni.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://mondoni.github.io/"/>
+  <updated>2014-03-04T20:01:20-03:00</updated>
+  <id>http://mondoni.github.io/</id>
+  <author>
+    <name><![CDATA[mondoni]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Instalando o Octpress no Fedora 20]]></title>
+    <link href="http://mondoni.github.io/blog/2014/03/03/instalando-o-octpress-no-fedora-20/"/>
+    <updated>2014-03-03T15:15:10-03:00</updated>
+    <id>http://mondoni.github.io/blog/2014/03/03/instalando-o-octpress-no-fedora-20</id>
+    <content type="html"><![CDATA[<p><img src="/images/octopress2.jpg" title="octopress" ></p>
+
+<!-- more -->
+
+
+<p>Recentemente um amigo queria um sistema para criar sua própria <em>Base de Conhecimento</em> e estava optando por utilizar o projeto <strong><a href="http://www.mediawiki.org/">MediaWiki</a></strong>. Porém, em minha opinião, ao utilizar o projeto MediaWiki para uma Base de Conhecimento pessoal têm algumas desvantagens, tais como:</p>
+
+<ul>
+<li>Banco de Dados (NoSQL, MySQL, Postgres, etc);</li>
+<li>Servidor Web (Apache, Nginx, etc);</li>
+<li>Manutenção;</li>
+<li>Entre outras.</li>
+</ul>
+
+
+<p>Então eu acabei recomendando o projeto <strong><em>Octopress</em></strong> com base em alguns testes que efetuei alguns anos atrás, retornando a utilizá-lo para criar esta página de apresentação e howto de instalação.</p>
+
+<h2>O que é o Octopress</h2>
+
+<p>Octopress é um sistema de blog estático que utiliza projeto <a href="http://jekyllrb.com/">Jekyll</a> para gerar as páginas e efetuar a publicação de seu conteúdo.</p>
+
+<p>Todo conteúdo a ser publicado com o <em>Octopress</em> deve ser gerenciado por arquivos texto utilizando a sintaxe <strong><em>Markdown</em></strong>. Markdown utiliza uma sintaxe simples e amplamente conhecida por quem utiliza o site <a href="http://github.com">Github</a> para hospedar seus projetos e efetuar a gerência de versão dos mesmos.</p>
+
+<p>Você pode encontrar um excelente guia sobre <em>Markdown</em> nesse link: <a href="http://guides.github.com/overviews/mastering-markdown/">Mastering Markdown</a></p>
+
+<p>Algumas vantagens do <em>Octopress</em> consiste em:</p>
+
+<ul>
+<li>Não utilizar banco de dados para armazenar as informações dos posts;</li>
+<li>Os posts serem simples arquivos textos em Markdown;</li>
+<li>Integração com o <strong><em>Github Pages</em></strong>;</li>
+<li><strong>Ser extremamente simples de implementar e utilizar</strong>.</li>
+</ul>
+
+
+<h2>Instalação</h2>
+
+<h4>Ambiente de Instalação</h4>
+
+<ul>
+<li><strong>OS</strong> &ndash; <em>Fedora 20 (Heisenbug)</em></li>
+<li><strong>Local</strong> &ndash; <em>Diretório <strong>home</strong> do usuário</em></li>
+</ul>
+
+
+<p>Obs.: para o funcionamento adequado do <em>Octopress</em> deve ser utilizado <em>Ruby 1.9.3</em> ou superior</p>
+
+<h4>Preparando o Ambiente</h4>
+
+<p><code>bash
+$ sudo yum install ruby rubygem-RedCloth ruby-devel rubygem-therubyracer gcc-c++
+</code></p>
+
+<h4>Instalando o Octopress</h4>
+
+<p><code>bash
+$ cd ~/
+$ git clone git://github.com/imathis/octopress.git octopress
+$ cd octopress/
+</code></p>
+
+<p>Na versão utilizada nessa instalação (2.5) deve ser efetuado uma alteração no arquivo <code>Gemfile</code>, adicionando as linhas:</p>
+
+<p><code>ruby
+gem 'json'
+gem 'execjs'
+gem 'therubyracer'
+</code></p>
+
+<p>Resultando no arquivo abaixo:</p>
+
+<p>```ruby
+source &ldquo;<a href="https://rubygems.org">https://rubygems.org</a>&rdquo;</p>
+
+<p>group :development do
+  gem &lsquo;rake&rsquo;, &lsquo;~> 0.9&rsquo;
+  gem &lsquo;jekyll&rsquo;, &lsquo;~> 0.12&rsquo;
+  gem &lsquo;rdiscount&rsquo;, &lsquo;~> 2.0.7&rsquo;
+  gem &lsquo;pygments.rb&rsquo;, &lsquo;~> 0.3.4&rsquo;
+  gem &lsquo;RedCloth&rsquo;, &lsquo;~> 4.2.9&rsquo;
+  gem &lsquo;haml&rsquo;, &lsquo;~> 3.1.7&rsquo;
+  gem &lsquo;compass&rsquo;, &lsquo;~> 0.12.2&rsquo;
+  gem &lsquo;sass&rsquo;, &lsquo;~> 3.2&rsquo;
+  gem &lsquo;sass-globbing&rsquo;, &lsquo;~> 1.0.0&rsquo;
+  gem &lsquo;rubypants&rsquo;, &lsquo;~> 0.2.0&rsquo;
+  gem &lsquo;rb-fsevent&rsquo;, &lsquo;~> 0.9&rsquo;
+  gem &lsquo;stringex&rsquo;, &lsquo;~> 1.4.0&rsquo;
+  gem &lsquo;liquid&rsquo;, &lsquo;~> 2.3.0&rsquo;
+  gem &lsquo;directory_watcher&rsquo;, &lsquo;1.4.1&rsquo;
+  gem &lsquo;json&rsquo;
+  gem &lsquo;execjs&rsquo;
+  gem &lsquo;therubyracer&rsquo;
+end</p>
+
+<p>gem &lsquo;sinatra&rsquo;, &lsquo;~> 1.4.2&rsquo;
+```</p>
+
+<p>O próximo passo é instalar o pacote <em>bundler</em>:</p>
+
+<p><code>bash
+$ gem install bundler
+$ bundle install
+</code>
+Caso ocorra o erro abaixo na instalação do bundle, você não deve ter o pacote <strong><em>ruby-devel</em></strong> instalado.</p>
+
+<p>```bash
+Gem::Installer::ExtensionBuildError: ERROR: Failed to build gem native extension.</p>
+
+<pre><code>/usr/bin/ruby extconf.rb 
+</code></pre>
+
+<p>mkmf.rb can&rsquo;t find header files for ruby at /usr/share/include/ruby.h
+```</p>
+
+<p>E o passo final da instalação é referente ao tema padrão utilizado pelo <em>Octopress</em>:</p>
+
+<p>```bash
+$ rake install</p>
+
+<h2>Copying classic theme into ./source and ./sass</h2>
+
+<p>mkdir -p source
+cp -r .themes/classic/source/. source
+mkdir -p sass
+cp -r .themes/classic/sass/. sass
+mkdir -p source/_posts
+mkdir -p public
+```</p>
+
+<h2>Configurando o Octopress</h2>
+
+<p>A configuração do <em>Octopress</em> é de extrema facilidade, o principal arquivo a ser alterado é <code>_config.yml</code> e as principais variáveis são:</p>
+
+<p><code>yaml
+url:         # For rewriting urls for RSS, etc
+title:      # Utilizado no cabeçalho e tags título
+subtitle:   # Uma descrição utilizada no cabeçalho
+author:     # Seu nome, para RSS, Copyright, Metadata
+</code></p>
+
+<p>Abaixo está a configuração do meu <em>Octopress</em>:</p>
+
+<p><code>
+url: http://mondoni.github.io
+title: The Endless Search for Knowledge
+subtitle:
+author:
+simple_search: http://google.com/search
+description:
+</code></p>
+
+<p>Obs.: eu optei por manter a variável <code>author</code> em branco, pois eu sou o único a fazer uso desse Blog.</p>
+
+<p>O Octopress por padrão traz algumas configurações do próprio <em>Jekyll</em> e alguns plugins adicionais que será comentado mais adiante no post.</p>
+
+<h2>Efetuando o Deploy do Octopress</h2>
+
+<p>É possível efetuar o deploy do Octopress das seguintes formas:</p>
+
+<h4>Github Pages</h4>
+
+<p>Serviço oferecido gratuitamente pelo Github que possibilita a criarde uma página pessoal com base num repositório git nomeado no padrão <code>username.github.io</code>. Também possibilita configurar um domínio próprio, caso você possua um.</p>
+
+<h4>Heroku</h4>
+
+<p>Serviço gratuíto semelhante ao Github Pages que também possibilita criar uma página pessoal com base num repositório git.</p>
+
+<h4>Rsync</h4>
+
+<p>Opção para caso você possua seu próprio servidor Web, assim podendo efetuar a sincronização do seu Octopress utilizando <strong>rsync</strong> e <strong>SSH</strong>.</p>
+
+<h4>Configurando o Deploy com Github Pages</h4>
+
+<p>Como eu achei mais prático fazer uso do Github, irei demonstrar como configurar o deploy com <strong><em><a href="http://pages.github.com/">Github Pages</a></em></strong>. Porém caso gostaria de maiores informações sobre os outros métodos, você encontrará no guia oficial sobre deploying: <a href="http://octopress.org/docs/deploying/">Deploying Octopress</a>.</p>
+
+<p>Obviamente você deve ter uma conta no Github, então caso ainda não possua <a href="https://github.com/join">clique aqui</a> para criar a sua conta.</p>
+
+<p>Tendo sua conta em &ldquo;mãos&rdquo;, crie um novo repositório cujo nome deve estar no seguinte formato <code>username.github.io</code>, onde <em>username</em> é o nome do seu usuário criado no Github.</p>
+
+<p>O Github Pages usa o branch <em>master</em> como diretório público para seu webserver provendo o acesso a sua página no endereço <code>username.github.io</code>. Todo conteúdo a ser criado no Octopress deverá ser dentro do diretório <strong><em>source</em></strong>, que também será um branch de mesmo nome do repositório criado no Github.</p>
+
+<p>O Octopress tem sua própria ferramenta para configurar a utilização do Github Pages, sem a necessidade de seguir a documentação do próprio Github. Para iniciar a configuração execute o comando abaixo:</p>
+
+<p><code>bash
+$ rake setup_github_pages
+</code></p>
+
+<p>O comando irá requisitar a URL SSH do seu repositório (ex.: <code>git@github.com:username/username.github.io.git</code>), o restante dos passos serão automáticos.</p>
+
+<p>O próximo passo será gerar o seu blog:</p>
+
+<p><code>bash
+$ rake generate
+$ rake deploy
+</code></p>
+
+<p>O passo acima irá gerar o seu blog, copiar os arquivos gerados para dentro do diretório <code>_deploy/</code>, adicioná-los ao git, efetuar o commit e enviar os arquivos para o branch master automaticamente.</p>
+
+<p>Caso você queira ver um preview do seu blog antes de efetuar o deploy, execute:</p>
+
+<p><code>bash
+$ rake preview
+</code></p>
+
+<p>Isso irá iniciar um webserver local, e você poderá acessar o preview do seu blog no endereço: <a href="http://localhost:4000">http://localhost:4000</a></p>
+
+<p>Como todo conteúdo é criado dentro do diretório <code>source/</code>, você não deve esquecer de efetuar o commit do branch source também. Sendo o primeiro commit após gerar o blog, execute os comandos abaixo:</p>
+
+<p><code>bash
+$ git add .
+$ git commit -m 'sua mensagem'
+$ git push origin source
+</code></p>
+
+<h2>Criando Conteúdo no Octopress</h2>
+
+<p>O Octopress traz consigo algumas ferramentas que auxilia na criação dos posts e páginas para o seu blog, como também irá automaticamente criar arquivos <em>XML</em> para utilizar como feeds de notícia. Será gerado um arquivo geral (<code>atom.xml</code>) e um baseado em suas categorias (<code>blog/categories/&lt;category&gt;/atom.xml</code>).</p>
+
+<h4>Posts</h4>
+
+<p>Os posts devem ser armazenados dentro do diretório <code>source/_posts</code> e nomeados de acordo com o padrão do Jekyll <code>YYYY-MM-DD-post-title.markdown</code>. Com a ferramenta provida pelo Octopress o arquivo é criado da forma correta automaticamente, para criar o seu post execute o comando abaixo:</p>
+
+<p><code>bash
+$ rake new_post["title"]
+</code></p>
+
+<p>Exemplo:</p>
+
+<p><code>bash
+$ rake new_post["Instalando o Octpress no Fedora 20"]
+</code></p>
+
+<p>E o arquivo <code>source/_posts/2014-03-03-instalando-o-octpress-no-fedora-20.markdown</code> é criado e irá encontrar o conteúdo:</p>
+
+<h2>```yaml</h2>
+
+<p>layout: post
+title: &ldquo;Instalando o Octpress no Fedora 20&rdquo;
+date: 2014-03-03 15:15:10 -0300
+comments: false</p>
+
+<h2>categories:</h2>
+
+<p>```</p>
+
+<p>Nessa seção você pode habilitar ou não comentários, adicionar categorias, especificar o autor do post com <code>author: Nome Autor</code>. Caso esteja escrevendo um rascunho e opte por não publicar ao gerar o blog você pode adicionar a opção <code>published: false</code>.</p>
+
+<p>Na opção categorias você pode usar uma única categoria ou múltiplas:</p>
+
+<p>```</p>
+
+<h1>Uma categoria</h1>
+
+<p>categories: octopress</p>
+
+<h1>Múltiplas categorias &ndash; exemplo 1</h1>
+
+<p>categories: [octopress, fedora, linux]</p>
+
+<h1>Múltiplas categorias &ndash; examplo 2</h1>
+
+<p>categories:
+&ndash; octopress
+&ndash; fedora
+&ndash; linux
+```</p>
+
+<p>O conteúdo do post em si deve ser adicionado abaixo do final da seção indicado pelos três traços: <code>---</code></p>
+
+<h4>Páginas</h4>
+
+<p>Novas páginas podem ser adicionadas em qualquer lugar dentro do diretório <code>source</code> e o Jekyll irá reconhecer e gerar a mesma para publicação. Mas o Octopress também uma ferramenta que facilita a criação de novas páginas:</p>
+
+<p><code>bash
+$ rake new_page[super-awesome]
+</code></p>
+
+<p>E a página <code>/source/super-awesome/index.markdown</code> será criada com um conteúdo semelhante ao abaixo:</p>
+
+<h2>```yaml</h2>
+
+<p>layout: page
+title: &ldquo;Super Awesome&rdquo;
+date: 2014-03-03 5:59
+comments: true
+sharing: true</p>
+
+<h2>footer: true</h2>
+
+<p>```</p>
+
+<h4>Conteúdo</h4>
+
+<p>Adicionalmente como opção para os posts você pode optar por adicionar o comentário <code>&lt;!-- more --&gt;</code> para que todo conteúdo abaixo dele não seja exibido ná página principal que contêm todos os posts, resultando na exibição de um botão escrito &ldquo;Read On &ndash;>&rdquo;.</p>
+
+<h2>Gerando o Blog</h2>
+
+<p>E para finalizar e poder publicar o seu blog com os posts criados, você deve executar os comandos para gerar e publicar o mesmo.</p>
+
+<h4>Gerando</h4>
+
+<p>Para gerar o blog, execute:</p>
+
+<p><code>bash
+$ rake generate
+</code></p>
+
+<h4>Publicando</h4>
+
+<p>Para publicar o blog no Github Pages enviando os arquivos para o repositório remoto, execute:</p>
+
+<p><code>bash
+$ rake deploy
+</code></p>
+
+<p>Lembrando de também de atualizar o branch source separadamente, como comentado na seção referente ao Github Pages.</p>
+
+<h4>Preview</h4>
+
+<p>Lembrando que existe a opção de preview local do seu blog pelo endereço: <code>http://localhost:4000</code>, execute:</p>
+
+<p><code>bash
+$ rake preview
+</code></p>
+
+<h2>Finalizando</h2>
+
+<p>Aqui finalizo o howto de instalação e configuração, bem como o básico de publicação.</p>
+
+<p>Aguarde novos posts explicando o uso de plugins, themes, etc.</p>
+
+<p>Cheers!!</p>
+]]></content>
+  </entry>
+  
+</feed>

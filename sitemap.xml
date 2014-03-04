@@ -1,15 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://mondoni.github.io/blog/2014/03/03/instalando-o-octpress-no-fedora-20/</loc>
+        <lastmod>2014-03-04T20:01:11-03:00</lastmod>
+    </url>
+    <url>
         <loc>http://mondoni.github.io/robots.txt</loc>
         <lastmod>2014-03-03T14:04:03-03:00</lastmod>
     </url>
     <url>
         <loc>http://mondoni.github.io/</loc>
-        <lastmod>2014-03-03T20:37:13-03:00</lastmod>
+        <lastmod>2014-03-04T20:01:11-03:00</lastmod>
     </url>
     <url>
         <loc>http://mondoni.github.io/blog/archives/</loc>
-        <lastmod>2014-03-03T15:59:08-03:00</lastmod>
+        <lastmod>2014-03-04T20:01:11-03:00</lastmod>
     </url>
 </urlset>
