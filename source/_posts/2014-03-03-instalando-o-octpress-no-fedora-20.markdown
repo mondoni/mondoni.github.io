@@ -4,7 +4,6 @@ title: "Instalando o Octpress no Fedora 20"
 date: 2014-03-03 15:15:10 -0300
 comments: false
 categories: [octopress, fedora]
-published: false
 ---
 {% img /images/octopress2.jpg octopress %}
 <!-- more -->
