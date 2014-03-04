@@ -101,7 +101,7 @@ $ bundle install
 ```
 Caso ocorra o erro abaixo na instalação do bundle, você não deve ter o pacote __*ruby-devel*__ instalado.
 
-```
+```bash
 Gem::Installer::ExtensionBuildError: ERROR: Failed to build gem native extension.
     /usr/bin/ruby extconf.rb 
 mkmf.rb can't find header files for ruby at /usr/share/include/ruby.h
@@ -183,7 +183,7 @@ O comando irá requisitar a URL SSH do seu repositório (ex.: `git@github.com:us
 O próximo passo será gerar o seu blog:
 
 ```bash
-$ rake generate
+$ rake generate 
 $ rake deploy
 ```
 
@@ -205,8 +205,115 @@ $ git commit -m 'sua mensagem'
 $ git push origin source
 ```
 
-
-
 ## Criando Conteúdo no Octopress
 
-> To Do
+O Octopress traz consigo algumas ferramentas que auxilia na criação dos posts e páginas para o seu blog, como também irá automaticamente criar arquivos _XML_ para utilizar como feeds de notícia. Será gerado um arquivo geral (`atom.xml`) e um baseado em suas categorias (`blog/categories/<category>/atom.xml`).
+
+#### Posts
+
+Os posts devem ser armazenados dentro do diretório `source/_posts` e nomeados de acordo com o padrão do Jekyll `YYYY-MM-DD-post-title.markdown`. Com a ferramenta provida pelo Octopress o arquivo é criado da forma correta automaticamente, para criar o seu post execute o comando abaixo:
+
+```bash
+$ rake new_post["title"]
+```
+
+Exemplo:
+
+```bash
+$ rake new_post["Instalando o Octpress no Fedora 20"]
+```
+
+E o arquivo `source/_posts/2014-03-03-instalando-o-octpress-no-fedora-20.markdown` é criado e irá encontrar o conteúdo:
+
+```yaml
+---
+layout: post
+title: "Instalando o Octpress no Fedora 20"
+date: 2014-03-03 15:15:10 -0300
+comments: false
+categories:
+---
+```
+
+Nessa seção você pode habilitar ou não comentários, adicionar categorias, especificar o autor do post com `author: Nome Autor`. Caso esteja escrevendo um rascunho e opte por não publicar ao gerar o blog você pode adicionar a opção `published: false`.
+
+Na opção categorias você pode usar uma única categoria ou múltiplas:
+
+```
+# Uma categoria
+categories: octopress
+
+# Múltiplas categorias - exemplo 1
+categories: [octopress, fedora, linux]
+
+# Múltiplas categorias - examplo 2
+categories:
+- octopress
+- fedora
+- linux 
+```
+
+O conteúdo do post em si deve ser adicionado abaixo do final da seção indicado pelos três traços: `---`
+
+#### Páginas
+
+Novas páginas podem ser adicionadas em qualquer lugar dentro do diretório `source` e o Jekyll irá reconhecer e gerar a mesma para publicação. Mas o Octopress também uma ferramenta que facilita a criação de novas páginas:
+
+```bash
+$ rake new_page[super-awesome]
+```
+
+E a página `/source/super-awesome/index.markdown` será criada com um conteúdo semelhante ao abaixo:
+
+```yaml
+---
+layout: page
+title: "Super Awesome"
+date: 2014-03-03 5:59
+comments: true
+sharing: true
+footer: true
+--- 
+```
+
+#### Conteúdo
+
+Adicionalmente como opção para os posts você pode optar por adicionar o comentário `<!-- more -->` para que todo conteúdo abaixo dele não seja exibido ná página principal que contêm todos os posts, resultando na exibição de um botão escrito "Read On ->".
+
+## Gerando o Blog
+
+E para finalizar e poder publicar o seu blog com os posts criados, você deve executar os comandos para gerar e publicar o mesmo.
+
+#### Gerando
+
+Para gerar o blog, execute:
+
+```bash
+$ rake generate
+```
+
+#### Publicando
+
+Para publicar o blog no Github Pages enviando os arquivos para o repositório remoto, execute:
+
+```bash
+$ rake deploy
+```
+
+Lembrando de também de atualizar o branch source separadamente, como comentado na seção referente ao Github Pages.
+
+#### Preview
+
+Lembrando que existe a opção de preview local do seu blog pelo endereço: `http://localhost:4000`, execute:
+
+```bash
+$ rake preview
+```
+
+## Finalizando
+
+Aqui finalizo o howto de instalação e configuração, bem como o básico de publicação.
+
+Aguarde novos posts explicando o uso de plugins, themes, etc.
+
+Cheers!!
